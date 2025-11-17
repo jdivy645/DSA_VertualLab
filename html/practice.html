@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Code Runner</title>
+    <link rel="stylesheet" href="/style/common.css">
+  </head>
+  <body>
+    <header id="site-header"></header>
+    <section class="section">
+      <div class="container">
+        <h2>Practice — Live Code Runner</h2>
+        <div class="editor-shell">
+          <div class="editor-toolbar">
+            <select id="language">
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+              <option value="html">HTML</option>
+            </select>
+            <button class="btn" id="runBtn">Run</button>
+            <button class="small-btn" id="debugBtn">Debug</button>
+            <button class="small-btn" id="undoBtn">Undo</button>
+            <button class="small-btn" id="clearBtn">Clear</button>
+            <div style="flex:1"></div>
+            <span style="color:var(--muted);font-size:13px">Output / Console</span>
+          </div>
+
+          <textarea id="code" class="code-editor" placeholder="Write your code here...">// Try console.log('hello')
+</textarea>
+
+          <div class="output-panel" id="output-container" style="display:block">
+            <pre id="output">Output will appear here...</pre>
+            <iframe id="html-output" class="output-iframe" style="display:none"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer id="site-footer"></footer>
+
+    <script src="/script/common.js"></script>
+    <script src="/script/practice.js"></script>
+  </body>
+</html>

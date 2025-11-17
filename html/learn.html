@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSA Virtual Lab</title>
+    <link rel="stylesheet" href="/style/common.css" />
+  </head>
+  <body>
+    <main>
+      <header id="site-header"></header>
+
+      <!-- Topic Navigation with Buttons -->
+      <section class="section">
+        <div class="container">
+          <div class="topic-nav">
+            <h3>📚 Topics</h3>
+            <div class="topic-buttons">
+              <div class="topic-item">
+                <button class="topic-btn active" onclick="showTopic('arrays')">📊 Arrays</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('linked-lists')">⛓️ Linked Lists</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('stacks')">📚 Stacks</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('queues')">🚦 Queues</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('trees')">🌳 Trees</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('graphs')">🕸️ Graphs</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('sorting')">↕️ Sorting</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('hash-tables')">🔐 Hashing</button>
+              </div>
+
+              <div class="topic-item">
+                <button class="topic-btn" onclick="showTopic('searching')">🔍 Searching</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Arrays Section -->
+      <section class="section topic-section" id="arrays" data-topic="arrays" style="display: block;">
+        <div class="container">
+          <h3>📊 Arrays</h3>
+          <h4 id="arrays-aim">🎯 Aim</h4>
+          <p>To master arrays as the fundamental data structure for efficient data storage and retrieval with direct index-based access.</p>
+          
+          <h4 id="arrays-objective">🔍 Objective</h4>
+          <p>To understand array memory layout, learn how elements are accessed and modified, and explore insertion/deletion operations.</p>
+          
+          <h4 id="arrays-theory">📚 Theory</h4>
+          <div class="theory-box">
+            <p><strong>Arrays</strong> are collections of elements stored in contiguous memory locations, each identified by an index. Key characteristics:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Access O(1), Insertion O(n), Deletion O(n)</li>
+              <li><strong>Space Complexity:</strong> O(n) for n elements</li>
+              <li><strong>Memory:</strong> Contiguous allocation for fast access</li>
+              <li><strong>Index:</strong> 0-based in most programming languages</li>
+            </ul>
+          </div>
+          
+          <h4 id="arrays-example">💻 Example</h4>
+          <pre><code># Python Example - Arrays
+arr = [10, 20, 30, 40, 50]
+print("Original array:", arr)
+print("Element at index 2:", arr[2])  # Output: 30
+print("Array length:", len(arr))      # Output: 5
+arr[1] = 25                            # Modify element
+print("Updated array:", arr)          # Output: [10, 25, 30, 40, 50]
+arr.append(60)                         # Add element
+print("After append:", arr)           # Output: [10, 25, 30, 40, 50, 60]
+          </code></pre>
+          
+          <h4 id="arrays-visual">🎨 Visual Representation</h4>
+          <div class="visual-representation">
+            <canvas id="arrayCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="arrayValue" placeholder="Enter value (1-100)" min="1" max="100" value="50">
+              <button class="vc-btn" onclick="interactiveArrayInsert()">➕ Insert</button>
+              <button class="vc-btn" onclick="interactiveArrayDelete()">➖ Delete</button>
+              <button class="vc-btn" onclick="interactiveArrayClear()">🔄 Clear</button>
+              <button class="vc-btn" onclick="interactiveArrayVisualize()">👁️ Visualize</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Linked Lists Section -->
+      <section class="section topic-section" id="linked-lists" data-topic="linked-lists" style="display: none;">
+        <div class="container">
+          <h3>⛓️ Linked Lists</h3>
+          <h4 id="linked-lists-aim">🎯 Aim</h4>
+          <p>To explore linked lists as a dynamic data structure offering flexibility over fixed-size arrays.</p>
+          
+          <h4 id="linked-lists-objective">🔍 Objective</h4>
+          <p>To understand node-based structures and master insertion/deletion operations with dynamic memory allocation.</p>
+          
+          <h4 id="linked-lists-theory">📚 Theory</h4>
+          <div class="theory-box">
+            <p><strong>Linked Lists</strong> are linear data structures where each element (node) contains data and a reference to the next node. Characteristics:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Access O(n), Insertion O(1)*, Deletion O(1)*</li>
+              <li><strong>Space Complexity:</strong> O(n) for n elements</li>
+              <li><strong>Memory:</strong> Non-contiguous, dynamic allocation</li>
+              <li><strong>Advantage:</strong> Efficient insertions and deletions</li>
+            </ul>
+          </div>
+          
+          <h4 id="linked-lists-example">💻 Example</h4>
+          <pre><code># Python Example - Linked List
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+node1 = Node(10)
+node2 = Node(20)
+node3 = Node(30)
+node1.next = node2
+node2.next = node3
+
+current = node1
+while current:
+    print(current.data, end=" -> ")
+    current = current.next
+print("None")  # Output: 10 -> 20 -> 30 -> None
+          </code></pre>
+          
+          <h4 id="linked-lists-visual">🎨 Visual Representation</h4>
+          <div class="visual-representation">
+            <canvas id="linkedListCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="llValue" placeholder="Enter value (1-100)" min="1" max="100" value="10">
+              <button class="vc-btn" onclick="interactiveListInsert()">➕ Insert</button>
+              <button class="vc-btn" onclick="interactiveListDelete()">➖ Delete</button>
+              <button class="vc-btn" onclick="interactiveListVisualize()">👁️ Visualize</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stacks Section -->
+      <section class="section topic-section" id="stacks" data-topic="stacks" style="display: none;">
+        <div class="container">
+          <h3>📚 Stacks (LIFO)</h3>
+          <h4 id="stacks-aim">🎯 Aim</h4>
+          <p>To master stack data structure and understand Last-In-First-Out (LIFO) principle with real-world applications.</p>
+          
+          <h4 id="stacks-objective">🔍 Objective</h4>
+          <p>To implement stack operations (push, pop) and apply stacks to solve practical problems like parenthesis matching.</p>
+          
+          <h4 id="stacks-theory">📚 Theory</h4>
+          <div class="theory-box">
+            <p><strong>Stacks</strong> follow the Last-In-First-Out (LIFO) principle where the last element added is the first to be removed:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Push O(1), Pop O(1), Peek O(1)</li>
+              <li><strong>Space Complexity:</strong> O(n) for n elements</li>
+              <li><strong>Operations:</strong> Push (add), Pop (remove from top), Peek (view top)</li>
+              <li><strong>Applications:</strong> Recursion, Undo/Redo, Browser history, Expression evaluation</li>
+            </ul>
+          </div>
+          
+          <h4 id="stacks-example">💻 Example</h4>
+          <pre><code># Python Example - Stack
+stack = []
+stack.append(1)      # Push
+stack.append(2)      # Push
+stack.append(3)      # Push
+print("Stack:", stack)           # Output: [1, 2, 3]
+print("Peek top:", stack[-1])    # Output: 3
+print("Popped:", stack.pop())    # Output: 3
+print("Updated Stack:", stack)   # Output: [1, 2]
+          </code></pre>
+          
+          <h4 id="stacks-visual">🎨 Visual Representation</h4>
+          <div class="visual-representation">
+            <canvas id="stackCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="stackValue" placeholder="Enter value (1-100)" min="1" max="100" value="15">
+              <button class="vc-btn" onclick="interactiveStackPush()">⬆️ Push</button>
+              <button class="vc-btn" onclick="interactiveStackPop()">⬇️ Pop</button>
+              <button class="vc-btn" onclick="interactiveStackVisualize()">👁️ Visualize</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Queues Section -->
+      <section class="section topic-section" id="queues" data-topic="queues" style="display: none;">
+        <div class="container">
+          <h3>🚦 Queues (FIFO)</h3>
+          <h4 id="queues-aim">🎯 Aim</h4>
+          <p>To understand queue data structure and master First-In-First-Out (FIFO) principle for orderly processing.</p>
+          
+          <h4 id="queues-objective">🔍 Objective</h4>
+          <p>To implement queue operations (enqueue, dequeue) and apply queues to scheduling and buffering scenarios.</p>
+          
+          <h4 id="queues-theory">📚 Theory</h4>
+          <div class="theory-box">
+            <p><strong>Queues</strong> follow the First-In-First-Out (FIFO) principle where elements are added at the rear and removed from the front:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Enqueue O(1), Dequeue O(1), Peek O(1)</li>
+              <li><strong>Space Complexity:</strong> O(n) for n elements</li>
+              <li><strong>Operations:</strong> Enqueue (add at rear), Dequeue (remove from front), Peek</li>
+              <li><strong>Applications:</strong> Process scheduling, Printer queues, BFS, Message queues</li>
+            </ul>
+          </div>
+          
+          <h4 id="queues-example">💻 Example</h4>
+          <pre><code># Python Example - Queue
+from collections import deque
+queue = deque([1, 2, 3])
+print("Queue:", queue)            # Output: deque([1, 2, 3])
+queue.append(4)                   # Enqueue
+print("After Enqueue:", queue)    # Output: deque([1, 2, 3, 4])
+print("Dequeued:", queue.popleft())  # Output: 1
+print("Updated Queue:", queue)    # Output: deque([2, 3, 4])
+          </code></pre>
+          
+          <h4 id="queues-visual">🎨 Visual Representation</h4>
+          <div class="visual-representation">
+            <canvas id="queueCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="queueValue" placeholder="Enter value (1-100)" min="1" max="100" value="20">
+              <button class="vc-btn" onclick="interactiveQueueEnqueue()">➡️ Enqueue</button>
+              <button class="vc-btn" onclick="interactiveQueueDequeue()">⬅️ Dequeue</button>
+              <button class="vc-btn" onclick="interactiveQueueVisualize()">👁️ Visualize</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trees Section -->
+      <section class="section topic-section" id="trees" data-topic="trees" style="display: none;">
+        <div class="container">
+          <h3>Trees</h3>
+          <h4 id="trees-aim">Aim</h4>
+          <p>To explore trees as hierarchical data structures for organizing data.</p>
+          <h4 id="trees-objective">Objective</h4>
+          <p>To understand the structure and types of trees, focusing on their efficiency in searching and insertion.</p>
+          <h4 id="trees-theory">📚 Theory</h4>
+          <div class="theory-box">
+            <p><strong>Trees</strong> are non-linear, hierarchical data structures consisting of nodes connected by edges. Key characteristics:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Root Node:</strong> The topmost node with no parent</li>
+              <li><strong>Child Nodes:</strong> Nodes connected below a parent node</li>
+              <li><strong>Leaf Nodes:</strong> Nodes with no children</li>
+              <li><strong>Height:</strong> Maximum distance from root to leaf</li>
+              <li><strong>Depth:</strong> Distance from root to a specific node</li>
+              <li><strong>Applications:</strong> File systems, DOM trees, expression parsing, searching</li>
+            </ul>
+          </div>
+
+          <!-- Binary Tree -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 1. Binary Tree</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="binary-tree-aim">Aim</h5>
+          <p>To understand the simplest form of a tree with at most two children per node.</p>
+          <h5 id="binary-tree-objective">Objective</h5>
+          <p>To learn the basic structure and traversal of binary trees.</p>
+          <h5 id="binary-tree-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Binary Trees</strong> restrict each node to at most two children (left and right). Key properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Full Binary Tree:</strong> Every node has 0 or 2 children</li>
+              <li><strong>Complete Binary Tree:</strong> All levels are filled except possibly the last</li>
+              <li><strong>Perfect Binary Tree:</strong> All internal nodes have two children and all leaves are at same level</li>
+              <li><strong>Traversals:</strong> In-order (Left-Root-Right), Pre-order (Root-Left-Right), Post-order (Left-Right-Root), Level-order (BFS)</li>
+              <li><strong>Time Complexity:</strong> Search O(n), Insert O(n), Delete O(n)</li>
+            </ul>
+          </div>
+          <h5 id="binary-tree-example">Example</h5>
+          <pre><code># Python Example - Binary Tree
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+print("Root:", root.value)  # Output: 1
+print("Left Child:", root.left.value)  # Output: 2
+print("Right Child:", root.right.value)  # Output: 3
+          </code></pre>
+          <h5 id="binary-tree-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="binaryTreeCanvas" width="600" height="300"></canvas>
+            <button onclick="startBinaryTreeAnimation()">Start Animation</button>
+          </div>
+          </div>
+
+          <!-- Binary Search Tree (BST) -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 2. Binary Search Tree (BST)</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="bst-aim">Aim</h5>
+          <p>To study an ordered binary tree for efficient searching.</p>
+          <h5 id="bst-objective">Objective</h5>
+          <p>To implement and understand BST operations like insertion and search.</p>
+          <h5 id="bst-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Binary Search Trees (BST)</strong> maintain left &lt; parent &lt; right ordering. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Ordering Property:</strong> Left &lt; Parent &lt; Right</li>
+              <li><strong>Time Complexity:</strong> Avg O(log n), Worst O(n)</li>
+              <li><strong>Search:</strong> Compare and traverse accordingly</li>
+              <li><strong>Insert/Delete:</strong> Maintain ordering</li>
+              <li><strong>Applications:</strong> Database indexing, sorted data</li>
+            </ul>
+          </div>
+          <h5 id="bst-example">Example</h5>
+          <pre><code># Python Example - BST Insertion
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def insert(root, value):
+    if not root:
+        return Node(value)
+    if value < root.value:
+        root.left = insert(root.left, value)
+    else:
+        root.right = insert(root.right, value)
+    return root
+
+root = Node(10)
+insert(root, 5)
+insert(root, 15)
+print("Root:", root.value)  # Output: 10
+print("Left:", root.left.value)  # Output: 5
+print("Right:", root.right.value)  # Output: 15
+          </code></pre>
+          <h5 id="bst-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="bstCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="bstValue" placeholder="Value" min="1" max="100" value="25">
+              <button class="vc-btn" onclick="interactiveBSTInsert()">Insert</button>
+              <button class="vc-btn" onclick="interactiveBSTSearch()">Search</button>
+              <button class="vc-btn" onclick="interactiveBSTVisualize()">Visualize</button>
+            </div>
+          </div>
+        </div>
+
+          <!-- AVL Tree -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 3. AVL Tree</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="avl-aim">Aim</h5>
+          <p>To explore a self-balancing BST for consistent performance.</p>
+          <h5 id="avl-objective">Objective</h5>
+          <p>To understand AVL tree balancing through rotations.</p>
+          <h5 id="avl-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>AVL Trees</strong> are self-balancing BSTs with automatic height balancing. Features:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Balance Factor:</strong> Height difference ≤ 1 between left and right subtrees</li>
+              <li><strong>Rotations:</strong> Left, Right, Left-Right, Right-Left to maintain balance</li>
+              <li><strong>Time Complexity:</strong> All operations O(log n) guaranteed</li>
+              <li><strong>Height:</strong> Always O(log n) for n nodes</li>
+              <li><strong>Insertion/Deletion:</strong> Followed by rebalancing operations</li>
+            </ul>
+          </div>
+          <h5 id="avl-example">Example</h5>
+          <pre><code># Python Example - AVL Tree (Simplified)
+class AVLNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+        self.height = 1
+
+root = AVLNode(10)
+root.left = AVLNode(5)
+root.right = AVLNode(15)
+print("Root:", root.value)  # Output: 10
+print("Left:", root.left.value)  # Output: 5
+print("Right:", root.right.value)  # Output: 15
+          </code></pre>
+          <h5 id="avl-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="avlCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="avlValue" placeholder="Value" min="1" max="100" value="30">
+              <button class="vc-btn" onclick="interactiveAVLInsert()">Insert</button>
+              <button class="vc-btn" onclick="interactiveAVLVisualize()">Visualize</button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Red-Black Tree -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 4. Red-Black Tree</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="red-black-aim">Aim</h5>
+          <p>To study a self-balancing BST with color properties.</p>
+          <h5 id="red-black-objective">Objective</h5>
+          <p>To understand Red-Black tree rules and their balancing mechanism.</p>
+          <h5 id="red-black-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Red-Black Trees</strong> are self-balancing BSTs using color-based rules. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Rule 1:</strong> Every node is red or black</li>
+              <li><strong>Rule 2:</strong> Root is always black</li>
+              <li><strong>Rule 3:</strong> All leaves (NIL) are black</li>
+              <li><strong>Rule 4:</strong> Red node children are black</li>
+              <li><strong>Rule 5:</strong> All root-leaf paths have same black count</li>
+              <li><strong>Time:</strong> All operations O(log n) guaranteed</li>
+            </ul>
+          </div>
+          <h5 id="red-black-example">Example</h5>
+          <pre><code># Python Example - Red-Black Tree (Simplified)
+class RBNode:
+    def __init__(self, value, color="red"):
+        self.value = value
+        self.left = None
+        self.right = None
+        self.color = color
+
+root = RBNode(10, "black")
+root.left = RBNode(5, "red")
+root.right = RBNode(15, "red")
+print("Root:", root.value, "Color:", root.color)  # Output: 10 Color: black
+          </code></pre>
+          <h5 id="red-black-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="redBlackCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="rbValue" placeholder="Value" min="1" max="100" value="35">
+              <button class="vc-btn" onclick="interactiveRBInsert()">Insert</button>
+              <button class="vc-btn" onclick="interactiveRBVisualize()">Visualize</button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Trie -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 5. Trie</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="trie-aim">Aim</h5>
+          <p>To explore a tree for efficient string operations.</p>
+          <h5 id="trie-objective">Objective</h5>
+          <p>To implement a trie for prefix-based searches.</p>
+          <h5 id="trie-theory">Theory</h5>
+          <div class="theory-box">
+            <p>A trie (prefix tree) is a tree where each node represents a character...</p>
+          </div>
+          <h5 id="trie-example">Example</h5>
+          <pre><code># Python Example - Trie Insertion
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+
+def insert(root, word):
+    node = root
+    for char in word:
+        if char not in node.children:
+            node.children[char] = TrieNode()
+        node = node.children[char]
+    node.is_end = True
+
+root = TrieNode()
+insert(root, "cat")
+print("Trie has 'c':", 'c' in root.children)  # Output: True
+          </code></pre>
+          <h5 id="trie-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="trieCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="text" id="trieWord" placeholder="Word" maxlength="10" value="cat">
+              <button class="vc-btn" onclick="interactiveTrieInsert()">Insert</button>
+              <button class="vc-btn" onclick="interactiveTrieVisualize()">Visualize</button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Heap -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 6. Heap</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="heap-aim">Aim</h5>
+          <p>To study heaps for priority-based operations.</p>
+          <h5 id="heap-objective">Objective</h5>
+          <p>To implement a min-heap for efficient priority queue operations.</p>
+          <h5 id="heap-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Heaps</strong> are complete binary trees satisfying heap property. Types:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Max Heap:</strong> Parent ≥ Children (root is maximum)</li>
+              <li><strong>Min Heap:</strong> Parent ≤ Children (root is minimum)</li>
+              <li><strong>Complete:</strong> All levels filled except last (left-justified)</li>
+              <li><strong>Time:</strong> Insert/Delete O(log n), GetMin/Max O(1)</li>
+              <li><strong>Array Representation:</strong> Left child at 2i+1, Right at 2i+2</li>
+              <li><strong>Applications:</strong> Priority queues, heap sort, Dijkstra's algorithm</li>
+            </ul>
+          </div>
+          <h5 id="heap-example">Example</h5>
+          <pre><code># Python Example - Min-Heap
+from heapq import heappush, heappop
+heap = []
+heappush(heap, 10)
+heappush(heap, 5)
+heappush(heap, 15)
+print("Min-Heap:", heap)  # Output: [5, 10, 15]
+print("Popped:", heappop(heap))  # Output: 5
+          </code></pre>
+          <h5 id="heap-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="heapCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <input type="number" id="heapValue" placeholder="Value" min="1" max="100" value="40">
+              <button class="vc-btn" onclick="interactiveHeapInsert()">Insert</button>
+              <button class="vc-btn" onclick="interactiveHeapPop()">Pop Min</button>
+              <button class="vc-btn" onclick="interactiveHeapVisualize()">Visualize</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Graphs Section -->
+      <section class="section topic-section" id="graphs" data-topic="graphs" style="display: none;">
+        <div class="container">
+          <h3>Graphs</h3>
+          <h4 id="graphs-aim">Aim</h4>
+          <p>To study graphs as a data structure for modeling complex relationships.</p>
+          <h4 id="graphs-objective">Objective</h4>
+          <p>To understand graph representations and their applications.</p>
+          <h4 id="graphs-theory">Theory</h4>
+          <div class="theory-box">
+            <p>A graph consists of vertices (nodes) and edges (connections)...</p>
+          </div>
+
+          <!-- Undirected Graph -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 1. Undirected Graph</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="undirected-graph-aim">Aim</h5>
+          <p>To explore graphs with bidirectional edges.</p>
+          <h5 id="undirected-graph-objective">Objective</h5>
+          <p>To implement an undirected graph using adjacency lists.</p>
+          <h5 id="undirected-graph-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Undirected Graphs</strong> have no direction on edges. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Edge:</strong> Bidirectional - if A connects to B, then B connects to A</li>
+              <li><strong>Degree:</strong> Number of edges connected to a node</li>
+              <li><strong>Representation:</strong> Adjacency matrix (symmetric), Adjacency list</li>
+              <li><strong>Traversal:</strong> DFS (Depth-First) and BFS (Breadth-First)</li>
+              <li><strong>Connectivity:</strong> Path exists between every pair of vertices</li>
+              <li><strong>Applications:</strong> Social networks, highways, utility networks</li>
+            </ul>
+          </div>
+          <h5 id="undirected-graph-example">Example</h5>
+          <pre><code># Python Example - Undirected Graph
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A', 'D'],
+    'D': ['B', 'C']
+}
+print("Neighbors of A:", graph['A'])  # Output: ['B', 'C']
+          </code></pre>
+            <h5 id="undirected-graph-visual">Visual Representation (Undirected)</h5>
+            <div class="visual-representation">
+              <canvas id="undirectedGraphCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <input type="text" id="graphNode" placeholder="Node" maxlength="1" value="E">
+                <button class="vc-btn" onclick="interactiveGraphAddNode()">Add Node</button>
+                <button class="vc-btn" onclick="interactiveGraphVisualize()">Visualize</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Directed Graph -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 2. Directed Graph</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="directed-graph-aim">Aim</h5>
+          <p>To study graphs with directional edges.</p>
+          <h5 id="directed-graph-objective">Objective</h5>
+          <p>To implement a directed graph for one-way relationships.</p>
+          <h5 id="directed-graph-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Directed Graphs</strong> have directed edges (arcs). Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Edge:</strong> One-directional - A→B does not imply B→A</li>
+              <li><strong>In-degree:</strong> Number of incoming edges</li>
+              <li><strong>Out-degree:</strong> Number of outgoing edges</li>
+              <li><strong>Representation:</strong> Adjacency matrix (asymmetric), Adjacency list</li>
+              <li><strong>Traversal:</strong> DFS and BFS respecting edge direction</li>
+              <li><strong>Applications:</strong> Web links, task dependencies, state machines</li>
+            </ul>
+          </div>
+          <h5 id="directed-graph-example">Example</h5>
+          <pre><code># Python Example - Directed Graph
+digraph = {
+    'A': ['B'],
+    'B': ['C'],
+    'C': ['D'],
+    'D': []
+}
+print("Neighbors of A:", digraph['A'])  # Output: ['B']
+          </code></pre>
+          <h5 id="directed-graph-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="directedGraphCanvas" width="600" height="300"></canvas>
+            <button onclick="startDirectedGraphAnimation()">Start Animation</button>
+          </div>
+          </div>
+
+          <!-- Weighted Graph -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 3. Weighted Graph</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="weighted-graph-aim">Aim</h5>
+          <p>To explore graphs with weighted edges.</p>
+          <h5 id="weighted-graph-objective">Objective</h5>
+          <p>To implement a weighted graph for optimization problems.</p>
+          <h5 id="weighted-graph-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Weighted Graphs</strong> have costs/weights on edges. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Edge Weight:</strong> Represents cost, distance, capacity, etc.</li>
+              <li><strong>Representation:</strong> Adjacency matrix (includes weights), Adjacency list (with weights)</li>
+              <li><strong>Traversal:</strong> DFS and BFS still work, but consider weights for shortest path</li>
+              <li><strong>Shortest Path:</strong> Dijkstra (non-negative), Bellman-Ford (negative allowed)</li>
+              <li><strong>Minimum Spanning Tree:</strong> Kruskal's, Prim's algorithm</li>
+              <li><strong>Applications:</strong> GPS navigation, airline routes, network optimization</li>
+            </ul>
+          </div>
+          <h5 id="weighted-graph-example">Example</h5>
+          <pre><code># Python Example - Weighted Graph
+weighted_graph = {
+    'A': {'B': 4, 'C': 2},
+    'B': {'D': 3},
+    'C': {'D': 5},
+    'D': {}
+}
+print("Weight A to B:", weighted_graph['A']['B'])  # Output: 4
+          </code></pre>
+          <h5 id="weighted-graph-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="weightedGraphCanvas" width="600" height="300"></canvas>
+            <button onclick="startWeightedGraphAnimation()">Start Animation</button>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sorting Algorithms Section -->
+      <section class="section topic-section" id="sorting" data-topic="sorting" style="display: none;">
+        <div class="container">
+          <h3>Sorting Algorithms</h3>
+          <h4 id="sorting-algorithms-aim">Aim</h4>
+          <p>To understand various sorting algorithms and their efficiency.</p>
+          <h4 id="sorting-algorithms-objective">Objective</h4>
+          <p>To implement and compare sorting techniques.</p>
+          <h4 id="sorting-algorithms-theory">📚 Theory</h4>
+          <div class="theory-box">
+            <p><strong>Sorting Algorithms</strong> arrange elements in a specific order. Categories:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Comparison-based:</strong> Bubble, Insertion, Selection, Merge, Quick</li>
+              <li><strong>Non-comparison:</strong> Counting, Radix, Bucket Sort</li>
+              <li><strong>Stable:</strong> Maintains relative order of equal elements</li>
+              <li><strong>In-place:</strong> Requires minimal extra space</li>
+              <li><strong>Time Complexity:</strong> Best, Average, and Worst cases vary by algorithm</li>
+              <li><strong>Adaptive:</strong> Some algorithms are faster on partially sorted data</li>
+            </ul>
+          </div>
+
+          <!-- Bubble Sort -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 1. Bubble Sort</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="bubble-sort-aim">Aim</h5>
+          <p>To study a simple comparison-based sorting algorithm.</p>
+          <h5 id="bubble-sort-objective">Objective</h5>
+          <p>To implement bubble sort and understand its inefficiency.</p>
+          <h5 id="bubble-sort-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Bubble Sort</strong> repeatedly compares adjacent elements and swaps if needed. Details:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Best O(n), Avg O(n²), Worst O(n²)</li>
+              <li><strong>Space Complexity:</strong> O(1) - in-place</li>
+              <li><strong>Stable:</strong> Yes - maintains relative order</li>
+              <li><strong>Adaptive:</strong> Yes - optimized version is O(n) for sorted arrays</li>
+              <li><strong>Method:</strong> Repeatedly walk through list, swap adjacent if out of order</li>
+              <li><strong>Use Case:</strong> Educational, nearly sorted small arrays</li>
+            </ul>
+          </div>
+          <h5 id="bubble-sort-example">Example</h5>
+          <pre><code># Python Example - Bubble Sort
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+arr = [64, 34, 25, 12, 22]
+print("Sorted:", bubble_sort(arr))  # Output: [12, 22, 25, 34, 64]
+          </code></pre>
+            <h5 id="bubble-sort-visual">Visual Representation (Bubble)</h5>
+            <div class="visual-representation">
+              <canvas id="bubbleSortCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <button class="vc-btn" onclick="interactiveBubbleSort()">Start Sort</button>
+                <button class="vc-btn" onclick="interactiveSortShuffle()">Shuffle</button>
+                <button class="vc-btn" onclick="interactiveSortVisualize()">Visualize</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Merge Sort -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 2. Merge Sort</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="merge-sort-aim">Aim</h5>
+          <p>To explore a divide-and-conquer sorting algorithm.</p>
+          <h5 id="merge-sort-objective">Objective</h5>
+          <p>To implement merge sort for stable and efficient sorting.</p>
+          <h5 id="merge-sort-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Merge Sort</strong> uses divide-and-conquer approach. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Best O(n log n), Avg O(n log n), Worst O(n log n)</li>
+              <li><strong>Space Complexity:</strong> O(n) - requires extra space</li>
+              <li><strong>Stable:</strong> Yes - maintains equal element order</li>
+              <li><strong>Divide:</strong> Split array into halves recursively</li>
+              <li><strong>Conquer:</strong> Merge two sorted halves back together</li>
+              <li><strong>Use Case:</strong> Large datasets, guaranteed O(n log n), external sorting</li>
+            </ul>
+          </div>
+          <h5 id="merge-sort-example">Example</h5>
+          <pre><code># Python Example - Merge Sort
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+arr = [38, 27, 43, 3, 9]
+print("Sorted:", merge_sort(arr))  # Output: [3, 9, 27, 38, 43]
+          </code></pre>
+          <h5 id="merge-sort-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="mergeSortCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <button class="vc-btn" onclick="interactiveMergeSort()">Start Sort</button>
+              <button class="vc-btn" onclick="interactiveMergeSortShuffle()">Shuffle</button>
+              <button class="vc-btn" onclick="interactiveMergeSortVisualize()">Visualize</button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Quick Sort -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 3. Quick Sort</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="quick-sort-aim">Aim</h5>
+          <p>To study a fast, in-place sorting algorithm.</p>
+          <h5 id="quick-sort-objective">Objective</h5>
+          <p>To implement quick sort and understand pivot-based partitioning.</p>
+          <h5 id="quick-sort-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Quick Sort</strong> uses divide-and-conquer with in-place partitioning. Details:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Best O(n log n), Avg O(n log n), Worst O(n²)</li>
+              <li><strong>Space Complexity:</strong> O(log n) - recursive stack</li>
+              <li><strong>Stable:</strong> No - does not maintain equal element order</li>
+              <li><strong>Pivot Selection:</strong> Critical to performance</li>
+              <li><strong>Partitioning:</strong> Elements &lt; pivot on left, &gt; pivot on right</li>
+              <li><strong>Use Case:</strong> General-purpose, very practical, real-world sorting</li>
+            </ul>
+          </div>
+          <h5 id="quick-sort-example">Example</h5>
+          <pre><code># Python Example - Quick Sort
+def quick_sort(arr, low, high):
+    if low < high:
+        pi = partition(arr, low, high)
+        quick_sort(arr, low, pi - 1)
+        quick_sort(arr, pi + 1, high)
+
+def partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
+
+arr = [10, 7, 8, 9, 1]
+quick_sort(arr, 0, len(arr) - 1)
+print("Sorted:", arr)  # Output: [1, 7, 8, 9, 10]
+          </code></pre>
+          <h5 id="quick-sort-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="quickSortCanvas" width="600" height="300"></canvas>
+            <div class="visual-controls">
+              <button class="vc-btn" onclick="interactiveQuickSort()">Start Sort</button>
+              <button class="vc-btn" onclick="interactiveQuickSortShuffle()">Shuffle</button>
+              <button class="vc-btn" onclick="interactiveQuickSortVisualize()">Visualize</button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Insertion Sort -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 4. Insertion Sort</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="insertion-sort-aim">Aim</h5>
+            <p>To study a simple incremental sorting algorithm.</p>
+            <h5 id="insertion-sort-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Insertion Sort</strong> builds sorted array one item at a time. Details:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Best O(n), Avg O(n²), Worst O(n²)</li>
+              <li><strong>Space Complexity:</strong> O(1) - in-place</li>
+              <li><strong>Stable:</strong> Yes - maintains relative order</li>
+              <li><strong>Adaptive:</strong> Yes - efficient for nearly sorted data</li>
+              <li><strong>Method:</strong> Iterate from position 1, insert each element into sorted left section</li>
+              <li><strong>Use Case:</strong> Small arrays, nearly sorted data, online sorting</li>
+            </ul>
+          </div>
+            <h5 id="insertion-sort-visual">Visual Representation</h5>
+            <div class="visual-representation">
+              <canvas id="insertionSortCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <button class="vc-btn" onclick="interactiveInsertionSort()">Start Sort</button>
+                <button class="vc-btn" onclick="interactiveInsertionShuffle()">Shuffle</button>
+                <button class="vc-btn" onclick="interactiveInsertionVisualize()">Visualize</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Selection Sort -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 5. Selection Sort</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="selection-sort-aim">Aim</h5>
+            <p>To study a selection-based sorting algorithm.</p>
+            <h5 id="selection-sort-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Selection Sort</strong> finds minimum element repeatedly. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Best O(n²), Avg O(n²), Worst O(n²)</li>
+              <li><strong>Space Complexity:</strong> O(1) - in-place</li>
+              <li><strong>Stable:</strong> No - does not maintain relative order</li>
+              <li><strong>Adaptive:</strong> No - doesn't benefit from sorted data</li>
+              <li><strong>Method:</strong> Find minimum, swap with current position, repeat</li>
+              <li><strong>Advantage:</strong> Minimal swaps compared to bubble sort</li>
+            </ul>
+          </div>
+            <h5 id="selection-sort-visual">Visual Representation</h5>
+            <div class="visual-representation">
+              <canvas id="selectionSortCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <button class="vc-btn" onclick="interactiveSelectionSort()">Start Sort</button>
+                <button class="vc-btn" onclick="interactiveSelectionShuffle()">Shuffle</button>
+                <button class="vc-btn" onclick="interactiveSelectionVisualize()">Visualize</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shell Sort -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 6. Shell Sort</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="shell-sort-aim">Aim</h5>
+            <p>To study a generalization of insertion sort with gap sequences.</p>
+            <h5 id="shell-sort-theory">Theory</h5>
+            <div class="theory-box">
+              <p>Shell sort sorts elements at specific gaps, gradually reducing the gap until gap=1 (becomes insertion sort).</p>
+            </div>
+            <h5 id="shell-sort-visual">Visual Representation</h5>
+            <div class="visual-representation">
+              <canvas id="shellSortCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <button class="vc-btn" onclick="interactiveShellSort()">Start Sort</button>
+                <button class="vc-btn" onclick="interactiveShellShuffle()">Shuffle</button>
+                <button class="vc-btn" onclick="interactiveShellVisualize()">Visualize</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hash Tables Section -->
+      <section class="section topic-section" id="hash-tables" data-topic="hash-tables" style="display: none;">
+        <div class="container">
+          <h3>Hash Tables</h3>
+          <h4 id="HashTables-aim">Aim</h4>
+          <p>To explore hash tables for fast key-value storage.</p>
+          <h4 id="HashTables-objective">Objective</h4>
+          <p>To understand hashing and collision resolution techniques.</p>
+          <h4 id="HashTables-theory">Theory</h4>
+          <div class="theory-box">
+            <p>A hash table maps keys to values using a hash function...</p>
+          </div>
+
+          <!-- Hash Table with Chaining -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 1. Hash Table with Chaining</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="chaining-aim">Aim</h5>
+          <p>To study collision resolution using linked lists.</p>
+          <h5 id="chaining-objective">Objective</h5>
+          <p>To implement a hash table with chaining.</p>
+          <h5 id="chaining-theory">Theory</h5>
+          <div class="theory-box">
+            <p>Chaining resolves collisions by storing colliding elements in a linked list...</p>
+          </div>
+          <h5 id="chaining-example">Example</h5>
+          <pre><code># Python Example - Hash Table with Chaining
+class HashTable:
+    def __init__(self, size):
+        self.size = size
+        self.table = [[] for _ in range(size)]
+
+    def hash(self, key):
+        return hash(key) % self.size
+
+    def insert(self, key, value):
+        index = self.hash(key)
+        self.table[index].append((key, value))
+
+ht = HashTable(5)
+ht.insert("apple", 1)
+ht.insert("banana", 2)
+print("Table[0]:", ht.table[ht.hash("apple")])  # Output: [('apple', 1)]
+          </code></pre>
+            <h5 id="hash-table-visual">Visual Representation (Chaining)</h5>
+            <div class="visual-representation">
+              <canvas id="chainingCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <input type="text" id="hashKey" placeholder="Key" maxlength="10" value="apple">
+                <input type="number" id="hashValue" placeholder="Value" min="1" max="100" value="5">
+                <button class="vc-btn" onclick="interactiveHashInsert()">Insert</button>
+                <button class="vc-btn" onclick="interactiveHashSearch()">Search</button>
+                <button class="vc-btn" onclick="interactiveHashVisualize()">Visualize</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hash Table with Open Addressing -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 2. Hash Table with Open Addressing</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="open-addressing-aim">Aim</h5>
+          <p>To explore collision resolution using probing.</p>
+          <h5 id="open-addressing-objective">Objective</h5>
+          <p>To implement a hash table with linear probing.</p>
+          <h5 id="open-addressing-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Open Addressing</strong> resolves collisions by finding alternative slots. Methods:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Linear Probing:</strong> Check next consecutive slot (h(k)+i mod m)</li>
+              <li><strong>Quadratic Probing:</strong> Check at h(k)+i² mod m intervals</li>
+              <li><strong>Double Hashing:</strong> Use second hash function h2(k) for step size</li>
+              <li><strong>Clustering:</strong> Can cause performance degradation (linear probing)</li>
+              <li><strong>Load Factor:</strong> Should stay below 0.5 for good performance</li>
+              <li><strong>Advantage:</strong> Better cache locality than chaining</li>
+            </ul>
+          </div>
+          <h5 id="open-addressing-example">Example</h5>
+          <pre><code># Python Example - Hash Table with Linear Probing
+class HashTableOA:
+    def __init__(self, size):
+        self.size = size
+        self.table = [None] * size
+
+    def hash(self, key):
+        return hash(key) % self.size
+
+    def insert(self, key, value):
+        index = self.hash(key)
+        while self.table[index] is not None:
+            index = (index + 1) % self.size
+        self.table[index] = (key, value)
+
+ht = HashTableOA(5)
+ht.insert("apple", 1)
+ht.insert("banana", 2)
+print("Table:", ht.table)  # Output: [None, None, ('apple', 1), ('banana', 2), None]
+          </code></pre>
+          <h5 id="open-addressing-visual">Visual Representation</h5>
+          <div class="visual-representation">
+            <canvas id="openAddressingCanvas" width="600" height="300"></canvas>
+            <button onclick="startOpenAddressingAnimation()">Start Animation</button>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Searching Section -->
+      <section class="section topic-section" id="searching" data-topic="searching" style="display: none;">
+        <div class="container">
+          <h3>🔍 Searching Algorithms</h3>
+          <h4 id="Searching-aim">Aim</h4>
+          <p>To master searching algorithms for efficiently finding elements in data structures.</p>
+          <h4 id="Searching-objective">Objective</h4>
+          <p>To understand and implement various search techniques with different time complexities.</p>
+          <h4 id="Searching-theory">Theory</h4>
+          <div class="theory-box">
+            <p><strong>Searching</strong> is the process of locating a specific element within a collection of data. Different searching algorithms are optimized for different scenarios:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Linear Search:</strong> O(n) - Checks each element sequentially</li>
+              <li><strong>Binary Search:</strong> O(log n) - Requires sorted data, divides search space in half</li>
+              <li><strong>Jump Search:</strong> O(√n) - Hybrid approach with block jumping</li>
+            </ul>
+          </div>
+
+          <!-- Linear Search -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 1. Linear Search (O(n))</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="linear-search-aim">Aim</h5>
+            <p>To explore the simplest search method that works on unsorted data.</p>
+            <h5 id="linear-search-objective">Objective</h5>
+            <p>To understand sequential element checking and implement linear search.</p>
+            <h5 id="linear-search-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Linear Search</strong> scans array sequentially to find element. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Best O(1), Avg O(n), Worst O(n)</li>
+              <li><strong>Space Complexity:</strong> O(1)</li>
+              <li><strong>Prerequisite:</strong> No - works on unsorted arrays</li>
+              <li><strong>Method:</strong> Start from first element, compare each element with target</li>
+              <li><strong>Advantage:</strong> Simple, works on any array</li>
+              <li><strong>Use Case:</strong> Small arrays, unsorted data, simple implementation needed</li>
+            </ul>
+          </div>
+            <h5 id="linear-search-example">Example</h5>
+            <pre><code># Python Example - Linear Search
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+arr = [4, 2, 7, 1, 9]
+result = linear_search(arr, 7)
+print(f"Found at index: {result}")  # Output: 2
+            </code></pre>
+            <h5 id="linear-search-visual">Visual Representation</h5>
+            <div class="visual-representation">
+              <canvas id="linearSearchCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <input type="number" id="linearSearchTarget" placeholder="Enter value" min="1" max="10" value="7">
+                <button class="vc-btn" onclick="startLinearSearchInteractive()">Search</button>
+                <button class="vc-btn" onclick="visualizeLinearArray()">Visualize</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Binary Search -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 2. Binary Search (O(log n))</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="binary-search-aim">Aim</h5>
+            <p>To master efficient search on sorted data using divide-and-conquer.</p>
+            <h5 id="binary-search-objective">Objective</h5>
+            <p>To implement binary search and understand its logarithmic time complexity.</p>
+            <h5 id="binary-search-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Binary Search</strong> divides array and searches halves. Properties:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> Best O(1), Avg O(log n), Worst O(log n)</li>
+              <li><strong>Space Complexity:</strong> O(1) iterative, O(log n) recursive</li>
+              <li><strong>Prerequisite:</strong> Array MUST be sorted</li>
+              <li><strong>Method:</strong> Compare middle element, eliminate half based on comparison</li>
+              <li><strong>Advantage:</strong> Much faster than linear on sorted data</li>
+              <li><strong>Use Case:</strong> Sorted arrays, large datasets, performance critical</li>
+            </ul>
+          </div>
+            <h5 id="binary-search-example">Example</h5>
+            <pre><code># Python Example - Binary Search
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+arr = [2, 3, 4, 10, 40]
+result = binary_search(arr, 10)
+print(f"Found at index: {result}")  # Output: 3
+            </code></pre>
+            <h5 id="binary-search-visual">Visual Representation</h5>
+            <div class="visual-representation">
+              <canvas id="binarySearchCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <input type="number" id="binarySearchTarget" placeholder="Enter value" min="2" max="40" value="10">
+                <button class="vc-btn" onclick="startBinarySearchInteractive()">Search</button>
+                <button class="vc-btn" onclick="visualizeBinaryArray()">Visualize</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jump Search -->
+          <button class="subtopic-toggle" onclick="toggleSubtopic(this)">▶ 3. Jump Search (O(√n))</button>
+          <div class="subtopic-content" style="display: none;">
+            <h5 id="jump-search-aim">Aim</h5>
+            <p>To study hybrid approach combining block jumping with linear search.</p>
+            <h5 id="jump-search-objective">Objective</h5>
+            <p>To understand jump search and its balance between linear and binary search.</p>
+            <h5 id="jump-search-theory">📚 Theory</h5>
+          <div class="theory-box">
+            <p><strong>Jump Search</strong> searches by jumping fixed steps then linear search. Details:</p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+              <li><strong>Time Complexity:</strong> O(√n) - optimal jump size is √n</li>
+              <li><strong>Space Complexity:</strong> O(1)</li>
+              <li><strong>Prerequisite:</strong> Array MUST be sorted</li>
+              <li><strong>Method:</strong> Jump by √n steps, when target found jump backward √n, linear search</li>
+              <li><strong>Advantage:</strong> Better than linear, requires one jump count only</li>
+              <li><strong>Use Case:</strong> When binary search not optimal, sorted data</li>
+            </ul>
+          </div>
+            <h5 id="jump-search-example">Example</h5>
+            <pre><code># Python Example - Jump Search
+import math
+
+def jump_search(arr, target):
+    n = len(arr)
+    step = int(math.sqrt(n))
+    prev = 0
+    
+    # Find block containing target
+    while arr[min(step, n) - 1] < target:
+        prev = step
+        step += int(math.sqrt(n))
+        if prev >= n:
+            return -1
+    
+    # Linear search in block
+    while arr[prev] < target:
+        prev += 1
+        if prev == min(step, n):
+            return -1
+    
+    return prev if arr[prev] == target else -1
+
+arr = [1, 3, 5, 7, 9, 11, 13]
+result = jump_search(arr, 7)
+print(f"Found at index: {result}")  # Output: 3
+            </code></pre>
+            <h5 id="jump-search-visual">Visual Representation</h5>
+            <div class="visual-representation">
+              <canvas id="jumpSearchCanvas" width="600" height="300"></canvas>
+              <div class="visual-controls">
+                <input type="number" id="jumpSearchTarget" placeholder="Enter value" min="1" max="13" value="7">
+                <button class="vc-btn" onclick="startJumpSearchInteractive()">Search</button>
+                <button class="vc-btn" onclick="visualizeJumpArray()">Visualize</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Summary Section -->
+      <section class="section" id="summary">
+        <div class="container">
+          <h2>Summary of Topics</h2>
+          <p>Here’s a quick overview of all the Data Structures and Algorithms covered:</p>
+          <ul class="summary-list">
+            <li><strong>Arrays:</strong> O(1) access, O(n) insertions/deletions, contiguous memory.</li>
+            <li><strong>Linked Lists:</strong> O(1) insertions/deletions, O(n) access, dynamic size.</li>
+            <li><strong>Stacks:</strong> LIFO, O(1) push/pop, used in recursion.</li>
+            <li><strong>Queues:</strong> FIFO, O(1) enqueue/dequeue, used in scheduling.</li>
+            <li><strong>Trees:</strong> Hierarchical, various types (Binary, BST, AVL, etc.).</li>
+            <li><strong>Graphs:</strong> Nodes and edges, directed/undirected, weighted.</li>
+            <li><strong>Sorting:</strong> Bubble (O(n²)), Merge (O(n log n)), Quick (O(n log n)).</li>
+            <li><strong>Hash Tables:</strong> O(1) average case, chaining/open addressing.</li>
+            <li><strong>Searching:</strong> Linear (O(n)), Binary (O(log n)), Jump (O(√n)).</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer id="site-footer"></footer>
+    </main>
+
+    <script src="/script/common.js"></script>
+    <script src="/script/learn.js"></script>
+  </body>
+</html>
